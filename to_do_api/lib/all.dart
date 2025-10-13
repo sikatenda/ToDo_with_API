@@ -11,20 +11,21 @@ class MyAll extends StatefulWidget {
 class _MyAllState extends State<MyAll> {
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: Scaffold(
-        body: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text('Welcom'),
-              ],
-            )
-          ],
-        ),
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.amberAccent,
+        title: const Center(child: Text('Tasks')),
+      ),
+      body: const Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text('Welcom'),
+            ],
+          )
+        ],
       ),
     );
   }
