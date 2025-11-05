@@ -1,2 +1,2 @@
 
-// This contains the model of my API response
+// This contains the model of my API response 
