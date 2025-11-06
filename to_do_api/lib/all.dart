@@ -13,6 +13,10 @@ class _MyAllState extends State<MyAll> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: FloatingActionButton(
+          backgroundColor: Colors.amber,
+          onPressed: () {},
+          child: const Icon(Icons.add)),
       appBar: AppBar(
         backgroundColor: Colors.amberAccent,
         title: const Center(child: Text('Tasks')),
@@ -22,25 +26,9 @@ class _MyAllState extends State<MyAll> {
           itemBuilder: (context, index) {
             return Card(
               child: ListTile(
-                title: Column(
-                  //mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(tasks[index]),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        IconButton(
-                            onPressed: () {}, icon: const Icon(Icons.delete)),
-                        IconButton(
-                            onPressed: () {}, icon: const Icon(Icons.edit))
-                      ],
-                    )
-                  ],
-                ),
-                //trailing:
-                // IconButton(onPressed: () {}, icon: const Icon(Icons.edit)),
+                title: Text(tasks[index]),
+                trailing: IconButton(
+                    onPressed: () {}, icon: const Icon(Icons.delete)),
               ),
             );
           }),
