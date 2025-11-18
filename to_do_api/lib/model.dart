@@ -12,7 +12,7 @@ class Tasks {
           id: id,
           name: name,
         ),
-      _ => throw const FormatException('Failed to load album.'),
+      _ => throw const FormatException('Failed to load tasks.'),
     };
   }
 }
