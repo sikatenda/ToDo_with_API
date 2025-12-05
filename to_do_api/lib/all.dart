@@ -1,5 +1,8 @@
 // ths page will display the record from the API
 import 'package:flutter/material.dart';
+import 'package:to_do_api/model.dart';
+import 'package:to_do_api/service.dart';
+
 //import 'package:http/http.dart' as http;
 
 class MyAll extends StatefulWidget {
@@ -11,7 +14,15 @@ class MyAll extends StatefulWidget {
 
 class _MyAllState extends State<MyAll> {
   TextEditingController textEditingController = TextEditingController();
-  List<String> tasks = ["studying", "coding", "cooking"];
+
+  late Future<Todos> futureTodos;
+
+  @override
+  void initState() {
+    super.initState();
+    futureTodos = fetchTodos();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,22 +36,21 @@ class _MyAllState extends State<MyAll> {
         backgroundColor: Colors.amberAccent,
         title: const Center(child: Text('Tasks')),
       ),
-      body: ListView.builder(
-          itemCount: tasks.length,
-          itemBuilder: (context, index) {
-            return Card(
-              child: ListTile(
-                title: Text(tasks[index]),
-                trailing: IconButton(
-                    onPressed: () {
-                      setState(() {
-                        tasks.removeAt(index);
-                      });
-                    },
-                    icon: const Icon(Icons.delete)),
-              ),
-            );
-          }),
+      body: Center(
+        child: FutureBuilder<Todos>(
+          future: futureTodos,
+          builder: (context, snapshot) {
+            if (snapshot.hasData) {
+              return Text(snapshot.data!.title);
+            } else if (snapshot.hasError) {
+              return Text('${snapshot.error}');
+            }
+
+            // By default, show a loading spinner.
+            return const CircularProgressIndicator();
+          },
+        ),
+      ),
     );
   }
 
@@ -59,7 +69,7 @@ class _MyAllState extends State<MyAll> {
               TextButton(
                   onPressed: () {
                     setState(() {
-                      tasks.add(textEditingController.text);
+                      //tasks.add(textEditingController.text);
                     });
                     textEditingController.clear();
                     Navigator.pop(context);
@@ -77,3 +87,25 @@ class _MyAllState extends State<MyAll> {
         });
   }
 }
+/*
+
+List<String> tasks = ["studying", "coding", "cooking"];
+
+ListView.builder(
+          itemCount: tasks.length,
+          itemBuilder: (context, index) {
+            return Card(
+              child: ListTile(
+                title: Text(tasks[index]),
+                trailing: IconButton(
+                    onPressed: () {
+                      setState(() {
+                        tasks.removeAt(index);
+                      });
+                    },
+                    icon: const Icon(Icons.delete)),
+              ),
+            );
+          }),
+
+*/
