@@ -15,12 +15,13 @@ class MyAll extends StatefulWidget {
 class _MyAllState extends State<MyAll> {
   TextEditingController textEditingController = TextEditingController();
 
-  late Future<Todos> futureTodos;
+  late Future<List<Todo>> futureTodos;
 
   @override
   void initState() {
     super.initState();
-    futureTodos = fetchTodos();
+    //futureTodos = fetchTodos() as Future<Todo>;
+    futureTodos = Apiservice().fetchTodos();
   }
 
   @override
@@ -36,20 +37,26 @@ class _MyAllState extends State<MyAll> {
         backgroundColor: Colors.amberAccent,
         title: const Center(child: Text('Tasks')),
       ),
-      body: Center(
-        child: FutureBuilder<Todos>(
-          future: futureTodos,
-          builder: (context, snapshot) {
-            if (snapshot.hasData) {
-              return Text(snapshot.data!.title);
-            } else if (snapshot.hasError) {
-              return Text('${snapshot.error}');
-            }
+      body: FutureBuilder<List<Todo>>(
+        future: futureTodos,
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const Center(child: CircularProgressIndicator());
+          } else if (snapshot.hasError) {
+            return Text('${snapshot.error}');
+          } else {
+            final todos = snapshot.data!;
+            return ListView.builder(
+              itemBuilder: (context, index) {
+                return ListTile(
+                  title: Text(todos[index].title),
+                );
+              },
+            );
+          }
 
-            // By default, show a loading spinner.
-            return const CircularProgressIndicator();
-          },
-        ),
+          // By default, show a loading spinner.
+        },
       ),
     );
   }

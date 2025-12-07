@@ -3,6 +3,22 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:to_do_api/model.dart';
 
+class Apiservice {
+  Future<List<Todo>> fetchTodos() async {
+    final response = await http.get(
+      Uri.parse('https://jsonplaceholder.typicode.com/todos'),
+    );
+
+    if (response.statusCode == 200) {
+      final List<dynamic> jsonList = jsonDecode(response.body);
+
+      return jsonList.map((json) => Todo.fromJson(json)).toList();
+    } else {
+      throw Exception('Failed to load todos');
+    }
+  }
+}
+/*
 Future<Todos> fetchTodos() async {
   final response = await http.get(
     Uri.parse('https://jsonplaceholder.typicode.com/todos'),
@@ -18,3 +34,4 @@ Future<Todos> fetchTodos() async {
     throw Exception('Failed to load todos');
   }
 }
+*/
