@@ -29,13 +29,14 @@ class _MyAllState extends State<MyAll> {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
           backgroundColor: Colors.amber,
-          onPressed: () {
-            addDialog(context);
+          onPressed: () async {
+            //addDialog(context);
+            // await Apiservice().fetchTodos();
           },
-          child: const Icon(Icons.add)),
+          child: const Icon(Icons.refresh)),
       appBar: AppBar(
         backgroundColor: Colors.amberAccent,
-        title: const Center(child: Text('Tasks')),
+        title: const Center(child: Text('List')),
       ),
       body: FutureBuilder<List<Todo>>(
         future: futureTodos,
@@ -48,9 +49,23 @@ class _MyAllState extends State<MyAll> {
             final todos = snapshot.data!;
             return ListView.builder(
               itemBuilder: (context, index) {
-                return ListTile(
-                  title: Text(todos[index].title),
-                );
+                return Card(
+                    child: ListTile(
+                  leading: CircleAvatar(
+                    child: Text(
+                      "${index + 1}",
+                      style: const TextStyle(color: Colors.black),
+                    ),
+                  ),
+                  title: Text(
+                    todos[index].title,
+                    style: const TextStyle(
+                        fontSize: 18, fontWeight: FontWeight.w600),
+                  ),
+                  subtitle: Text(todos[index].completed.toString()),
+                  trailing: IconButton(
+                      onPressed: () {}, icon: const Icon(Icons.delete)),
+                ));
               },
             );
           }
