@@ -24,10 +24,10 @@ Future<Todos> fetchTodos() async {
     Uri.parse('https://jsonplaceholder.typicode.com/todos'),
   );
 
-  if (response.statusCode == 200) {
-    // If the server did return a 200 OK response,
-    // then parse the JSON.
-    return Todos.fromJson(jsonDecode(response.body) as Map<String, dynamic>);
+  if (response.statusCode == 200)  {
+    // If the se rver did return a 200 OK response,
+    // then par se the JSON.
+    return  T odos.fromJson(jsonDecode(response.body) as Map<String, dynamic>);
   } else {
     // If the server did not return a 200 OK response,
     // then throw an exception.

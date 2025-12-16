@@ -14,22 +14,23 @@ class MyAll extends StatefulWidget {
 
 class _MyAllState extends State<MyAll> {
   TextEditingController textEditingController = TextEditingController();
-
+  // My todo list
   late Future<List<Todo>> futureTodos;
 
   @override
   void initState() {
     super.initState();
-    //futureTodos = fetchTodos() as Future<Todo>;
+
     futureTodos = Apiservice().fetchTodos();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      // floating button
       floatingActionButton: FloatingActionButton(
           backgroundColor: Colors.amber,
-          onPressed: () async {
+          onPressed: () {
             //addDialog(context);
             // await Apiservice().fetchTodos();
           },
