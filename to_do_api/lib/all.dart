@@ -39,6 +39,7 @@ class _MyAllState extends State<MyAll> {
         backgroundColor: Colors.amberAccent,
         title: const Center(child: Text('List')),
       ),
+      // My list view builder
       body: FutureBuilder<List<Todo>>(
         future: futureTodos,
         builder: (context, snapshot) {
@@ -53,19 +54,24 @@ class _MyAllState extends State<MyAll> {
                 return Card(
                     child: ListTile(
                   leading: CircleAvatar(
+                    // the circular avatar that display the index value of each item
                     child: Text(
                       "${index + 1}",
                       style: const TextStyle(color: Colors.black),
                     ),
                   ),
                   title: Text(
-                    todos[index].title,
+                    todos[index].title, // the text that display the title
                     style: const TextStyle(
                         fontSize: 18, fontWeight: FontWeight.w600),
                   ),
-                  subtitle: Text(todos[index].completed.toString()),
+                  subtitle: Text(todos[index]
+                      .completed
+                      .toString()), // displying the boolen value as a subtype
                   trailing: IconButton(
-                      onPressed: () {}, icon: const Icon(Icons.delete)),
+                      // icon for deleting
+                      onPressed: () {},
+                      icon: const Icon(Icons.delete)),
                 ));
               },
             );
@@ -77,6 +83,7 @@ class _MyAllState extends State<MyAll> {
     );
   }
 
+  // a dialog box that is used creating new record
   addDialog(BuildContext context) {
     showDialog(
         context: context,

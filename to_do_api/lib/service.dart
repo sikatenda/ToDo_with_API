@@ -3,12 +3,14 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:to_do_api/model.dart';
 
+//this class contains the API services
 class Apiservice {
   Future<List<Todo>> fetchTodos() async {
     final response = await http.get(
       Uri.parse('https://jsonplaceholder.typicode.com/todos'),
     );
 
+    // the if statement checks and return the API response
     if (response.statusCode == 200) {
       final List<dynamic> jsonList = jsonDecode(response.body);
 

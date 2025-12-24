@@ -1,11 +1,12 @@
 // This contains the model of my API response
 
 class Todo {
+  // dclaring a local variable
   final int userId;
   final int id;
   final String title;
   final bool completed;
-
+  //here is the constructor
   Todo({
     required this.userId,
     required this.id,
@@ -13,6 +14,7 @@ class Todo {
     required this.completed,
   });
 
+  //Then the factory
   factory Todo.fromJson(Map<String, dynamic> json) {
     return Todo(
       userId: json['userId'],
